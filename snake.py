@@ -4,14 +4,17 @@ import time
 import random
 from pygame.locals import *
 
+# Define needed colors
 blackcolor = pygame.Color(0,0,0)
-whitecolor = pygame.Color(255,255,255) # necessary?
+whitecolor = pygame.Color(255,255,255) 
 redcolor = pygame.Color(255,0,0)
 
+# Initiate variables
 totaltime = pygame.time.Clock()
 gameNum = 0
 mode = 0
 
+# Define interface while gameover
 def gameover(playSurf):
     gameoverFont = pygame.font.SysFont('microsoftsansserif',50)
     gameoverSurf = gameoverFont.render('Game is over',True,redcolor)
@@ -21,8 +24,9 @@ def gameover(playSurf):
     pygame.display.flip()
     time.sleep(1)
     menu(gameNum,totaltime)
-    
-def difficulty(totaltime):  #函数名不可与变量名相同，否则之后会无法调用（之前是mode（）,在menu中，mode一开始是作为func名，但调用后由于函数内对mode有更改，使得mode作为变量名，无法被调用）
+
+# Define difficulties-including easy, middle and hard modes
+def difficulty(totaltime): 
     capFont = pygame.font.SysFont('microsoftsansserif',40)
     capSurf = capFont.render('Gluttonous Snake',True,whitecolor)
     capRect = capSurf.get_rect()
@@ -80,7 +84,7 @@ def difficulty(totaltime):  #函数名不可与变量名相同，否则之后会
         totaltime.tick(10)
         
         
-
+# Define interface while entering the game or while restarting the game 
 def menu(gameNum,totaltime):
     pygame.init()
     capFont = pygame.font.SysFont('microsoftsansserif',40)
@@ -136,7 +140,8 @@ def menu(gameNum,totaltime):
 
 
 
-
+# Define "pause" button to pause the game in the process of playing
+# Offer two choices: exit and return
 def pause(playSurf,internaltime,paused,paused_rect):
     largeText = pygame.font.SysFont('microsoftsansserif',115)
     textSurf = largeText.render('Paused',True,redcolor)
@@ -163,9 +168,9 @@ def pause(playSurf,internaltime,paused,paused_rect):
                 sys.exit()
             elif event.type == MOUSEBUTTONDOWN:
                 if event.button == 1 and paused_rect.collidepoint(event.pos):
-                    paused = not paused  #此句不可改，因为如果仅仅break，paused还是True，下一个循环仍会继续
+                    paused = not paused  
                     #print(paused)
-                    break   #break和internaltime.tick(10)一起时，while每隔0.1s运行一次，break只会跳出当前循环，下一次又会进行判定
+                    break   
                 elif event.button == 1 and back_to_menuRect.collidepoint(event.pos):
                     menu(gameNum,totaltime)
                 elif event.button == 1 and exitRect.collidepoint(event.pos):
@@ -175,7 +180,7 @@ def pause(playSurf,internaltime,paused,paused_rect):
         pygame.display.flip()
         internaltime.tick(10)
         
-
+# Define the whole game process-basic rules and control.
 def main(mode):
     pygame.init()
     internaltime = pygame.time.Clock()
@@ -207,9 +212,9 @@ def main(mode):
                 if event.button == 1 and paused_rect.collidepoint(event.pos):
                     paused = not paused
                     #print(paused)
-                    pause(playSurf,internaltime,paused,paused_rect) #此处无需if判定
-                    paused = not paused  #因为函数pause里对paused的更改不能作用到全局，
-                                         #所以出来还要改一次，不然出来后paused还是True
+                    pause(playSurf,internaltime,paused,paused_rect) 
+                    paused = not paused  
+                                         
                 else:
                     playSurf.fill(blackcolor)
                     playSurf.blit(paused_image,paused_rect)
@@ -259,7 +264,7 @@ def main(mode):
             
         flag = 1
         playSurf.fill(blackcolor)
-        playSurf.blit(paused_image,paused_rect)#放在这里才不会被覆盖
+        playSurf.blit(paused_image,paused_rect)
         for position in snakeSeg:
             pygame.draw.rect(playSurf,whitecolor,Rect(position[0],position[1],20,20))
             pygame.draw.rect(playSurf,redcolor,Rect(snakePos[0],snakePos[1],20,20))
