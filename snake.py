@@ -1,3 +1,11 @@
+
+# @Author: Xinyi li
+# @File: snake.py
+# @Time: 2019/9/19
+# @Contact: lixinyi2019uk@163.com
+# @Description: Gluttonous Snake
+
+
 import pygame
 import sys
 import time
