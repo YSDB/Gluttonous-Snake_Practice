@@ -61,6 +61,8 @@ def difficulty(totaltime):
     
     modeSurf = pygame.display.set_mode((800,600))
     pygame.display.set_caption('Gluttonous Snake')
+    
+    global mode
 
     while True:
         modeSurf.blit(capSurf,capRect)
@@ -76,7 +78,6 @@ def difficulty(totaltime):
                 sys.exit()
             elif event.type == MOUSEBUTTONDOWN:
                 if event.button == 1 and mode_easyRect.collidepoint(event.pos):
-                    global mode
                     mode = 5
                     main(mode)
                 elif event.button == 1 and mode_midRect.collidepoint(event.pos):
