@@ -4,6 +4,7 @@
 # @Time: 2019/9/19
 # @Contact: lixinyi2019uk@163.com
 # @Description: Gluttonous Snake
+# @Python Version: 3.7.5
 
 
 import pygame
@@ -79,11 +80,9 @@ def difficulty(totaltime):
                     mode = 5
                     main(mode)
                 elif event.button == 1 and mode_midRect.collidepoint(event.pos):
-                    global mode
                     mode = 10
                     main(mode)
                 elif event.button == 1 and mode_hardRect.collidepoint(event.pos):
-                    global mode
                     mode = 15
                     main(mode)
                 elif event.button == 1 and backRect.collidepoint(event.pos):
