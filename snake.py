@@ -21,7 +21,7 @@ redcolor = pygame.Color(255,0,0)
 # Initiate variables
 totaltime = pygame.time.Clock()
 gameNum = 0
-mode = 0
+#mode = 0
 
 # Define interface while gameover
 def gameover(playSurf):
@@ -62,7 +62,7 @@ def difficulty(totaltime):
     modeSurf = pygame.display.set_mode((800,600))
     pygame.display.set_caption('Gluttonous Snake')
     
-    global mode
+    #global mode
 
     while True:
         modeSurf.blit(capSurf,capRect)
@@ -78,14 +78,14 @@ def difficulty(totaltime):
                 sys.exit()
             elif event.type == MOUSEBUTTONDOWN:
                 if event.button == 1 and mode_easyRect.collidepoint(event.pos):
-                    mode = 5
-                    main(mode)
+                    #mode = 5
+                    main(5)
                 elif event.button == 1 and mode_midRect.collidepoint(event.pos):
-                    mode = 10
-                    main(mode)
+                    #mode = 10
+                    main(10)
                 elif event.button == 1 and mode_hardRect.collidepoint(event.pos):
-                    mode = 15
-                    main(mode)
+                    #mode = 15
+                    main(15)
                 elif event.button == 1 and backRect.collidepoint(event.pos):
                     menu(gameNum,totaltime)                  
 
@@ -275,8 +275,8 @@ def main(mode):
         playSurf.blit(paused_image,paused_rect)
         for position in snakeSeg:
             pygame.draw.rect(playSurf,whitecolor,Rect(position[0],position[1],20,20))
-            pygame.draw.rect(playSurf,redcolor,Rect(snakePos[0],snakePos[1],20,20))
-            pygame.draw.rect(playSurf,whitecolor,Rect(foodPos[0],foodPos[1],20,20))
+        pygame.draw.rect(playSurf,redcolor,Rect(snakePos[0],snakePos[1],20,20))
+        pygame.draw.rect(playSurf,whitecolor,Rect(foodPos[0],foodPos[1],20,20))
 
         pygame.display.flip()
         if snakePos[0] > 780 or snakePos[0] < 0:
